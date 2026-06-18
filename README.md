@@ -25,7 +25,7 @@ I am building automation projects, documenting my progress, and sharing my learn
 | Day   | Topic                          | Status           |
 | ----- | ------------------------------ | --------------   |
 | Day 0 | Environment setup and GitHub   | ✅ Completed    |
-| Day 1 | Airtable + n8n basics          | 🚧 In Progress  |
+| Day 1 | Airtable + n8n basics          | ✅ Completed    |
 | Day 2 | Airtable deep dive             | ⏳ Planned      |
 | Day 3 | n8n workflows                  | ⏳ Planned      |
 | Day 4 | Make.com workflows             | ⏳ Planned      |
