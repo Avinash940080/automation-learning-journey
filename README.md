@@ -41,6 +41,6 @@ I am building automation projects, documenting my progress, and sharing my learn
 
 ## Daily Documentation
 
-* [Day 1]("C:\Users\avina\automation-learning-journey\Day-1")
+* [Day 1](./Day-1/readme.md)
 
 
