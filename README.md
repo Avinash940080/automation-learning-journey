@@ -27,7 +27,7 @@ I am building automation projects, documenting my progress, and sharing my learn
 | Day 0 | Environment setup and GitHub   | ✅ Completed    |
 | Day 1 | Airtable + n8n basics          | ✅ Completed    |
 | Day 2 | Airtable deep dive             | ✅ Completed    |
-| Day 3 | n8n workflows                  | ⏳ Planned      |
+| Day 3 | n8n workflows                  | ✅ Completed    |
 | Day 4 | Make.com workflows             | ⏳ Planned      |
 | Day 5 | APIs and webhooks              | ⏳ Planned      |
 | Day 6 | Portfolio projects             | ⏳ Planned      |
@@ -43,5 +43,5 @@ I am building automation projects, documenting my progress, and sharing my learn
 
 * [Day 1](./Day-1/readme.md)
 * [Day 2](./Day-2/readme.md)
-
+* [Day 3](./Day-3/readme.md)
 
