@@ -1,0 +1,168 @@
+{
+  "name": "Qualified Lead Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "value": "appABGXt8AS1dK9u2",
+          "mode": "id"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "tblWAV89CzmUQATgi",
+          "mode": "id"
+        },
+        "triggerField": "Created At",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "42a4ab30-7981-4321-a294-9605aefe3680",
+      "name": "Airtable Trigger",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "l7pJTCVVLsizpVoL",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d0f3669b-93f6-4d3f-92cd-93f861ddd48d",
+              "leftValue": "={{ $json.fields.Status }}",
+              "rightValue": "=Qualified",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "754c810b-5542-4946-bfb2-a559ef6a0673",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "228r1a0545@cmrec.ac.in",
+        "subject": "=Qualified lead: {{ $json.fields.Name }}",
+        "message": "=A new qualified lead has been added.\n\nName: {{ $json.fields.Name }}\n\nEmail: {{ $json.fields.Email }}\n\nCompany: {{ $json.fields.Company }}\n\nSource: {{ $json.fields.Source }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        -96
+      ],
+      "id": "adbcd21b-5448-4e68-871e-caaf459365ba",
+      "name": "Send a message",
+      "webhookId": "be780016-0f5c-4810-9fdb-a9def7be6902",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "228r1a0545@gmail.com",
+        "subject": "=Status",
+        "message": "Lead is not qualified yet.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        96
+      ],
+      "id": "e71b4b77-080a-4f53-8332-637740087443",
+      "name": "Send a message1",
+      "webhookId": "b6c19cf5-cb8a-4086-8e74-65c5bd872031",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "daf0ba6f-63d5-45f4-9f7e-4806156c4f76",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc75204983ad2f84fe6e2315cb354d0977f4201de5117fc2f17987d73c7482d3"
+  },
+  "nodeGroups": [],
+  "id": "iB2ilIW1JeAJjoOE",
+  "tags": []
+}
