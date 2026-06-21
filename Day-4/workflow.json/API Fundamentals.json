@@ -1,0 +1,180 @@
+{
+  "name": "API Fundamentals",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "day4-test",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d52d0ff7-c346-4362-9b77-15b026cd7e05",
+      "name": "Webhook",
+      "webhookId": "ceef2fb9-666b-49b0-a407-4875b96647d5"
+    },
+    {
+      "parameters": {
+        "url": "https://api.agify.io",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $json.body.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "2aad614f-4e32-464f-ab34-2a5b0e7ab3c2",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a6ccee97-086d-4158-9ec1-96fb32a20548",
+              "leftValue": "={{ $json.age }}",
+              "rightValue": 30,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "6b59cfca-89c0-4ec4-b32b-79b21b5a5fd9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "228r1a0545@gmail.com",
+        "subject": "=api",
+        "message": "={{ $json.name }} is qualified",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        -96
+      ],
+      "id": "1b797a98-fa3f-4b97-8b2e-90f7be80eed9",
+      "name": "Send a message",
+      "webhookId": "76493067-cb1f-49b7-a9c0-b405453f8510",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "228r1a0545@gmail.com",
+        "subject": "=api",
+        "message": "={{ $json.name }} is not qualified",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        96
+      ],
+      "id": "edb21859-4a79-42d2-be77-87d46348ea28",
+      "name": "Send a message1",
+      "webhookId": "410b788f-40ae-4727-bba0-5fcf60fe9dde",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "93709619-985d-4e22-92b5-ec63080c8095",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc75204983ad2f84fe6e2315cb354d0977f4201de5117fc2f17987d73c7482d3"
+  },
+  "nodeGroups": [],
+  "id": "CNV85yuME4nfWQGc",
+  "tags": []
+}

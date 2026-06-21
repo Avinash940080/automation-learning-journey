@@ -21,17 +21,16 @@ I am building automation projects, documenting my progress, and sharing my learn
 * Document projects and maintain a portfolio
 
 # Progress
-
-| Day   | Topic                          | Status           |
-| ----- | ------------------------------ | --------------   |
-| Day 0 | Environment setup and GitHub   | ✅ Completed    |
-| Day 1 | Airtable + n8n basics          | ✅ Completed    |
-| Day 2 | Airtable deep dive             | ✅ Completed    |
-| Day 3 | n8n workflows                  | ✅ Completed    |
-| Day 4 | Make.com workflows             | ⏳ Planned      |
-| Day 5 | APIs and webhooks              | ⏳ Planned      |
-| Day 6 | Portfolio projects             | ⏳ Planned      |
-| Day 7 | Workflow integration challenge | ⏳ Planned      |
+| Day   | Topic                             | Status      |
+| ----- | --------------------------------- | ----------- |
+| Day 0 | Environment Setup and GitHub      | ✅ Completed |
+| Day 1 | Airtable + n8n Basics             | ✅ Completed |
+| Day 2 | Airtable Deep Dive                | ✅ Completed |
+| Day 3 | Conditional Workflows in n8n      | ✅ Completed |
+| Day 4 | APIs, Webhooks, and HTTP Requests | ✅ Completed |
+| Day 5 | Authentication and AI Integration | ⏳ Planned   |
+| Day 6 | Make.com Essentials               | ⏳ Planned   |
+| Day 7 | End-to-End Autonomous Project     | ⏳ Planned   |
 
 ## Projects
 
@@ -44,4 +43,5 @@ I am building automation projects, documenting my progress, and sharing my learn
 * [Day 1](./Day-1/readme.md)
 * [Day 2](./Day-2/readme.md)
 * [Day 3](./Day-3/readme.md)
+* [Day 4](./Day-4/readme.md)
 
