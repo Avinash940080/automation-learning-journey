@@ -28,7 +28,7 @@ I am building automation projects, documenting my progress, and sharing my learn
 | Day 2 | Airtable Deep Dive                | ✅ Completed |
 | Day 3 | Conditional Workflows in n8n      | ✅ Completed |
 | Day 4 | APIs, Webhooks, and HTTP Requests | ✅ Completed |
-| Day 5 | Authentication and AI Integration | ⏳ Planned   |
+| Day 5 | Authentication and AI Integration | ✅ Completed |
 | Day 6 | Make.com Essentials               | ⏳ Planned   |
 | Day 7 | End-to-End Autonomous Project     | ⏳ Planned   |
 
@@ -44,4 +44,5 @@ I am building automation projects, documenting my progress, and sharing my learn
 * [Day 2](./Day-2/readme.md)
 * [Day 3](./Day-3/readme.md)
 * [Day 4](./Day-4/readme.md)
+* [Day 5](./Day-5/readme.md)
 
