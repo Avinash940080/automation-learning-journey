@@ -1,0 +1,104 @@
+{
+  "name": "AI Email Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "641ea5ee-f4be-4cfc-a81e-487523048c61",
+      "name": "Webhook",
+      "webhookId": "4b873768-40e0-4112-b809-d0da4ee3179a"
+    },
+    {
+      "parameters": {
+        "url": "https://zenquotes.io/api/random",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": []
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4.1-mini\",\n  \"input\": \"{{ $json.body.message }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ed7c0cd0-a585-4f04-b915-d0ad676250c8",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "228r1a0545@gmail.com",
+        "subject": "Your Daily Quote",
+        "message": "={{ $json.q }}\n{{ $json.a }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a6312e40-31d0-4672-b0e8-06e6cb0afd46",
+      "name": "Send a message",
+      "webhookId": "2d4a4fdb-7aed-4c26-a433-7b129792aedc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "5600509c-f992-425e-be46-70eb04f14dfd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc75204983ad2f84fe6e2315cb354d0977f4201de5117fc2f17987d73c7482d3"
+  },
+  "nodeGroups": [],
+  "id": "Hiujdjc0c7dJ6KXe",
+  "tags": []
+}
