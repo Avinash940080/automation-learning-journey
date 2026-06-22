@@ -29,7 +29,7 @@ I am building automation projects, documenting my progress, and sharing my learn
 | Day 3 | Conditional Workflows in n8n      | ✅ Completed |
 | Day 4 | APIs, Webhooks, and HTTP Requests | ✅ Completed |
 | Day 5 | Authentication and AI Integration | ✅ Completed |
-| Day 6 | Make.com Essentials               | ⏳ Planned   |
+| Day 6 | Make.com Essentials               | ✅ Completed |
 | Day 7 | End-to-End Autonomous Project     | ⏳ Planned   |
 
 ## Projects
@@ -45,4 +45,5 @@ I am building automation projects, documenting my progress, and sharing my learn
 * [Day 3](./Day-3/readme.md)
 * [Day 4](./Day-4/readme.md)
 * [Day 5](./Day-5/readme.md)
+* [Day 6](./Day-6/readme.md)
 
