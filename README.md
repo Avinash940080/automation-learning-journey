@@ -46,5 +46,5 @@ I am building automation projects, documenting my progress, and sharing my learn
 * [Day 4](./Day-4/readme.md)
 * [Day 5](./Day-5/readme.md)
 * [Day 6](./Day-6/readme.md)
-* [Job Alert Automation](./Job Alert Automation/README.md)
+
 
