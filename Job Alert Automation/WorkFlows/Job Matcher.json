@@ -1,0 +1,228 @@
+{
+  "name": "Job Matcher",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "49035b5b-f5e3-4260-a20f-1d1979e69400",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appabokh7l3hzXKeh",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbleAf3azobbTvoSQ",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "b1159368-1c0a-4547-9b33-db99eb84e322",
+      "name": "Search records",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "Hzc4gEgEhpDx6DLa",
+          "name": "Airtable Personal Access Token account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e750dfe4-ae46-4978-a769-89657d2564fb",
+              "name": "user_name",
+              "value": "={{ $json.fields.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "5bbe4919-a9d7-4e1f-a310-9f1f5ad664e2",
+              "name": "user_email",
+              "value": "={{ $json.fields.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "f86f6017-dea6-4da3-bd4f-f0aaeb47ea30",
+              "name": "user_role",
+              "value": "={{ $json.fields.Role }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "a0e81afb-ba23-488c-8fd9-a289292a3074",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appabokh7l3hzXKeh",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl5a64AkTNi4CNnQ",
+          "mode": "id"
+        },
+        "returnAll": false,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "b46037a9-2649-45ea-812c-c990343a7daa",
+      "name": "Search records1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "Hzc4gEgEhpDx6DLa",
+          "name": "Airtable Personal Access Token account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const users = $('Edit Fields').all();\nconst jobs = $input.all();\n\nconst emails = [];\n\nfor (const user of users) {\n\n    const name = user.json.user_name;\n    const email = user.json.user_email;\n    const role = user.json.user_role;\n\n    const matches = jobs.filter(job =>\n        job.json.fields.Title\n            .toLowerCase()\n            .includes(role.toLowerCase())\n    );\n\n    let emailBody = `Hi ${name},\n\nHere are today's job matches for ${role}:\n\n`;\n\n    if (matches.length === 0) {\n\n        emailBody += `No matching jobs were found today.\n\nPlease check again tomorrow.`;\n\n    } else {\n\n        matches.forEach((job, index) => {\n\n            emailBody += `${index + 1}. ${job.json.fields.Title}\\n\\n\nCompany: ${job.json.fields.Company}\\n\\n\nApply: ${job.json.fields.Link}\\n\\n\n\n`;\n\n        });\n    }\n\n    emailBody += `\nGood luck with your applications!\n\n- Job Assistant`;\n\n    emails.push({\n        json: {\n            email,\n            role,\n            emailBody\n        }\n    });\n}\n\nreturn emails;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        0
+      ],
+      "id": "7959c4d3-0127-4595-a0d4-865aa1622c88",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Daily job alert",
+        "message": "={{ $json.emailBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "ac6c830f-4a59-480f-9247-949c017574df",
+      "name": "Send a message",
+      "webhookId": "9d91eb99-7aa7-4242-b8a8-c99cf9218948",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RVh6rJzVzxeGyIEo",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Search records1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e317e47c-7dba-429d-9f86-339157e6f948",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc75204983ad2f84fe6e2315cb354d0977f4201de5117fc2f17987d73c7482d3"
+  },
+  "nodeGroups": [],
+  "id": "LPTOIiNG7fV0RVTr",
+  "tags": []
+}
